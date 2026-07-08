@@ -1,30 +1,120 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #ffffff; /* dark background */
+  color: #eaeaea; /* light text for contrast */
+  line-height: 1.6;
+}
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+/* Navigation */
+nav {
+  background-color: #1f1f1f;
+  padding: 1rem;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
-    }
-}        
+nav a {
+  text-decoration: none;
+  color: #c7a4ff; /* lila accent */
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #ffffff;
+  outline: none;
+}
+
+/* Main content */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+main h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #6000fa;
+}
+
+main h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #6000fa;
+}
+main ul {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+main ul li {
+  background-color: #1f1f1f;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+main ul li:hover {
+  background-color: #2a2a2a;
+}
+
+main p{
+    margin-bottom: 1.5rem;
+    color: #000000;
+}
+
+/* Logo */
+.main-logo {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+  background-color: #1f1f1f;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #bbbbbb;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  main h1 {
+    font-size: 1.5rem;
+  }
+
+  main ul li {
+    font-size: 1rem;
+  }
+}
+
+/* Accessibility: focus styles */
+a:focus {
+  outline: 2px solid #c7a4ff;
+  outline-offset: 2px;
+}
