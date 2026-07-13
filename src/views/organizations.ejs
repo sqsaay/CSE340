@@ -1,14 +1,21 @@
-   <%- include('partials/header') %>
-    <main>
-        <h1><%= title %></h1>
-        <p>Here are a few of our partner organizations:</p>
-        <ul>
-            <li><img src="/images/brightfuture-logo.png" alt="BrightFuture Builders logo"><strong>BrightFuture
-                    Builders</strong>: info@brightfuture.org</li>
-            <li><img src="/images/greenharvest-logo.png" alt="GreenHarvest Growers logo"><strong>GreenHarvest
-                    Growers</strong>: contact@greenharvest.org</li>
-            <li><img src="/images/unityserve-logo.png" alt="UnityServe Volunteers logo"><strong>UnityServe
-                    Volunteers</strong>: hello@unityserve.org</li>
-        </ul>
-    </main>
-    <%- include('partials/footer') %>
+<%- include('partials/header') %>
+
+        <main>
+                <h1>
+                        <%= title %>
+                </h1>
+
+                <p>Here are a few of our partner organizations:</p>
+                <ul>
+                        <% for (var i=0; i < organizations.length; i++) { %>
+                                <li>
+                                        <img src="/images/<%= organizations[i].logo_filename %>"
+                                                alt="<%= organizations[i].name %> logo">
+                                        <strong>
+                                                <%= organizations[i].name %>
+                                        </strong>: <%= organizations[i].contact_email %>
+                                </li>
+                                <% } %>
+                </ul>
+        </main>
+        <%- include('partials/footer') %>
