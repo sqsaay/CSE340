@@ -1,11 +1,18 @@
-   <%- include('partials/header') %>
+<%- include('partials/header') %>
     <main>
-        <h1><%= title %></h1>
-        <h2>Upcoming Service Projects</h2>
+        <h1>
+            <%= title %>
+        </h1>
+        <p>Here are a few of our partner projects:</p>
         <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
+            <% for (var i=0; i < projects.length; i++) { %>
+                <li>
+                    <strong>
+                        <%= projects[i].title %><br>
+                     <%= projects[i].location %> - <%= projects[i].project_date %>
+                    </strong>: <br> <%= projects[i].description %>
+                </li>
+                <% } %>
         </ul>
     </main>
     <%- include('partials/footer') %>
