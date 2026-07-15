@@ -1,12 +1,16 @@
-
-    <%- include('partials/header') %>
+<%- include('partials/header') %>
     <main>
-        <h1><%= title %></h1>
+        <h1>
+            <%= title %>
+        </h1>
         <ul>
-            <li>Environmental</li>
-            <li>Educational</li>
-            <li>Community Service</li>
-            <li>Health and Wellness</li>
+            <% for (var i=0; i < categories.length; i++) { %>
+                <li>
+                    <strong>
+                        <%= categories[i].name %>
+                    </strong>
+                </li>
+                <% } %>
         </ul>
         <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
     </main>

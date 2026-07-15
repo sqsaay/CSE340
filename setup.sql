@@ -50,3 +50,36 @@ INSERT INTO service_project (organization_id, title, description, location, proj
 (3, 'Animal Shelter Refurbishment', 'Helping the local shelter repair outdoor kennels, build new cat trees, and organize the donation pantry.', 'Hope Animal Shelter, North District', '2026-11-20'),
 
 (2, 'Winter Coat Collection', 'Collecting, sorting, and distributing winter coats and blankets to homeless shelters before the freeze.', 'St. Jude Community Center', '2026-12-01');
+
+-- ========================================
+-- Create Table Categories
+-- ========================================
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Create Join Table for Projects <-> Categories
+-- ========================================
+CREATE TABLE project_category (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    FOREIGN KEY (project_id) REFERENCES service_project(project_id),
+    FOREIGN KEY (category_id) REFERENCES category(category_id)
+);
+
+-- Add categories
+INSERT INTO category (name) VALUES
+('Education'),
+('Health'),
+('Community Development');
+
+-- Associate projects with categories
+INSERT INTO project_category (project_id, category_id) VALUES
+(1, 1), -- Project 1 → Education
+(1, 3), -- Project 1 → Community Development
+(2, 2), -- Project 2 → Health
+(3, 1); -- Project 3 → Education
+9
