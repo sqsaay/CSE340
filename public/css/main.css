@@ -64,7 +64,7 @@ main ul {
 }
 
 main ul li {
-  background-color: #1f1f1f;
+  background-color: #7aadff;
   margin: 0.5rem 0;
   padding: 0.75rem;
   border-radius: 6px;
@@ -72,7 +72,7 @@ main ul li {
 }
 
 main ul li:hover {
-  background-color: #2a2a2a;
+  background-color: #ac94df;
 }
 
 main p{
