@@ -30,4 +30,5 @@ const getOrganizationDetails = async (organizationId) => {
       return result.rows.length > 0 ? result.rows[0] : null;
 };
 
+
 export {getAllOrganizations, getOrganizationDetails}  

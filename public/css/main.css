@@ -7,8 +7,10 @@
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #ffffff; /* dark background */
-  color: #eaeaea; /* light text for contrast */
+  background-color: #ffffff;
+  /* dark background */
+  color: #000000;
+  /* light text for contrast */
   line-height: 1.6;
 }
 
@@ -28,7 +30,8 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #c7a4ff; /* lila accent */
+  color: #c7a4ff;
+  /* lila accent */
   font-weight: 600;
   transition: color 0.3s ease;
 }
@@ -58,6 +61,7 @@ main h2 {
   margin-bottom: 1rem;
   color: #6000fa;
 }
+
 main ul {
   list-style: none;
   margin-bottom: 2rem;
@@ -75,9 +79,9 @@ main ul li:hover {
   background-color: #ac94df;
 }
 
-main p{
-    margin-bottom: 1.5rem;
-    color: #000000;
+main p {
+  margin-bottom: 1.5rem;
+  color: #000000;
 }
 
 /* Logo */

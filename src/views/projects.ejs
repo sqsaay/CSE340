@@ -3,16 +3,23 @@
         <h1>
             <%= title %>
         </h1>
-        <p>Here are a few of our partner projects:</p>
+        <p>Here are the next five upcoming service projects:</p>
         <ul>
             <% for (var i=0; i < projects.length; i++) { %>
-                <li>
-                    <strong>
-                        <%= projects[i].title %><br>
-                     <%= projects[i].location %> - <%= projects[i].project_date %>
-                    </strong>: <br> <%= projects[i].description %>
-                </li>
-                <% } %>
+                <% const project=projects[i]; %>
+                    <li>
+                        <a href="/project/<%= project.project_id %>">
+                            <strong>
+                                <%= project.title %>
+                            </strong>
+                        </a>
+                        by <a href="/organization/<%= project.organization_id %>">
+                            <%= project.organization_name %>
+                        </a>
+                        <br>
+                        <%= project.date %> &ndash; <%= project.location %>
+                    </li>
+                    <% } %>
         </ul>
     </main>
     <%- include('partials/footer') %>
