@@ -5,12 +5,15 @@
         </h1>
         <ul>
             <% for (var i=0; i < categories.length; i++) { %>
-                <li>
-                    <strong>
-                        <%= categories[i].name %>
-                    </strong>
-                </li>
-                <% } %>
+                <% const category=categories[i]; %>
+                    <li>
+                        <a href="/category/<%= category.category_id %>">
+                            <strong>
+                                <%= category.name %>
+                            </strong>
+                        </a>
+                    </li>
+                    <% } %>
         </ul>
         <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
     </main>

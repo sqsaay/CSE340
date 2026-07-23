@@ -15,6 +15,18 @@
         <p><strong>Organization:</strong> <a href="/organization/<%= project.organization_id %>">
                 <%= project.organization_name %>
             </a></p>
-        <p><a href="/projects">Back to project list</a></p>
+        <% if (categories && categories.length> 0) { %>
+            <p><strong>Categories:</strong></p>
+            <ul class="category-tags">
+                <% categories.forEach(category=> { %>
+                    <li>
+                        <a href="/category/<%= category.category_id %>">
+                            <%= category.name %>
+                        </a>
+                    </li>
+                    <% }); %>
+            </ul>
+            <% } %>
+                <p><a href="/projects">Back to project list</a></p>
     </main>
     <%- include('partials/footer') %>
