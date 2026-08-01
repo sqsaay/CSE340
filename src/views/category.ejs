@@ -4,6 +4,9 @@
             <%= title %>
         </h1>
 
+        <div class="page-actions">
+            <a href="/edit-category/<%= category.category_id %>">Edit</a>
+        </div>
         <% if (category) { %>
             <section>
                 <p><strong>Category:</strong>
@@ -31,6 +34,8 @@
                 <p>Category not found.</p>
                 <% } %>
 
-                    <p><a href="/categories">Back to categories</a></p>
+                 <div class="page-actions">
+            <a href="/categories">Back to categories</a>
+        </div>
     </main>
     <%- include('partials/footer') %>

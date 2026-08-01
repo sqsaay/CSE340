@@ -3,18 +3,53 @@
         <h1>
             <%= title %>
         </h1>
-        <ul>
-            <% for (var i=0; i < categories.length; i++) { %>
-                <% const category=categories[i]; %>
-                    <li>
-                        <a href="/category/<%= category.category_id %>">
-                            <strong>
-                                <%= category.name %>
-                            </strong>
-                        </a>
-                    </li>
-                    <% } %>
-        </ul>
-        <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+
+        <div class="page-actions">
+            <a href="/new-category">Add a New Category</a>
+        </div>
+
+        <% const activeCategory=typeof category !=='undefined' ? category : null; const
+            categoryProjects=Array.isArray(typeof projects !=='undefined' ? projects : []) ? (typeof projects
+            !=='undefined' ? projects : []) : []; const categoryList=Array.isArray(typeof categories !=='undefined' ?
+            categories : []) ? (typeof categories !=='undefined' ? categories : []) : []; %>
+
+            <% if (activeCategory) { %>
+                <p><strong>Category:</strong>
+                    <%= activeCategory.name %>
+                </p>
+                <% if (categoryProjects.length> 0) { %>
+                    <h2>Projects in this category</h2>
+                    <ul>
+                        <% categoryProjects.forEach(project=> { %>
+                            <li>
+                                <a href="/project/<%= project.project_id %>">
+                                    <strong>
+                                        <%= project.title %>
+                                    </strong>
+                                </a>
+                                <br>
+                                <%= project.location %> &ndash; <%= project.project_date %>
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } else { %>
+                        <p>No projects found for this category.</p>
+                        <% } %>
+                            <% } else { %>
+                                <ul>
+                                    <% for (var i=0; i < categoryList.length; i++) { %>
+                                        <% const categoryItem=categoryList[i]; %>
+                                            <li>
+                                                <a href="/category/<%= categoryItem.category_id %>">
+                                                    <strong>
+                                                        <%= categoryItem.name %>
+                                                    </strong>
+                                                </a>
+                                            </li>
+                                            <% } %>
+                                </ul>
+                                <% } %>
+
+
     </main>
     <%- include('partials/footer') %>

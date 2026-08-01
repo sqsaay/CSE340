@@ -3,6 +3,10 @@
         <h1>
             <%= title %>
         </h1>
+        <div class="page-actions">
+            <a href="/organization/<%= project.organization_id %>">Back to organization</a>
+            <a href="/projects">Back to project list</a>
+        </div>
         <p><strong>Date:</strong>
             <%= project.date %>
         </p>
@@ -11,12 +15,6 @@
         </p>
         <p><strong>Description:</strong>
             <%= project.description %>
-        </p>
-        <p>
-            <a href="/organization/<%= project.organization_id %>">Back to organization</a>
-        </p>
-        <p>
-            <a href="/projects">Back to project list</a>
         </p>
     </main>
     <%- include('partials/footer') %>
