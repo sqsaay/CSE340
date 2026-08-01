@@ -1,5 +1,5 @@
 import { body, validationResult } from 'express-validator';
-import { getUpcomingProjects, getProjectDetails, createProject } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 
@@ -29,6 +29,20 @@ const showNewProjectForm = async (req, res) => {
     const title = 'Add New Project';
     res.render('new-project', { title, organizations });
 }
+
+const showEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+    const project = await getProjectDetails(projectId);
+    const organizations = await getAllOrganizations();
+    const title = 'Edit Service Project';
+
+    if (!project) {
+        res.status(404).send('Project not found');
+        return;
+    }
+
+    res.render('edit-project', { title, project, organizations });
+};
 
 const processNewProjectForm = async (req, res) => {
 
@@ -61,6 +75,30 @@ const processNewProjectForm = async (req, res) => {
 }
 
 
+const processEditProjectForm = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        errors.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+
+        return res.redirect(`/edit-project/${req.params.id}`);
+    }
+
+    const projectId = req.params.id;
+    const { title, description, location, date, organizationId } = req.body;
+
+    try {
+        await updateProject(projectId, title, description, location, date, Number(organizationId));
+        req.flash('success', 'Service project updated successfully!');
+        res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        console.error('Error updating project:', error);
+        req.flash('error', error.message || 'There was an error updating the service project.');
+        res.redirect(`/edit-project/${projectId}`);
+    }
+};
+
 const projectValidation = [
     body('title')
         .trim()
@@ -82,5 +120,5 @@ const projectValidation = [
         .isInt().withMessage('Organization must be a valid integer')
 ];
 export {
-    showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, projectValidation
+    showProjectsPage, showProjectDetailsPage, showNewProjectForm, showEditProjectForm, processNewProjectForm, processEditProjectForm, projectValidation
 };
