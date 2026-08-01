@@ -41,11 +41,46 @@ nav a:focus {
 }
 
 /* Flash message styles */
+.flash-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 31, 31, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.flash-modal.is-hidden {
+  display: none;
+}
+
+.flash-modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  width: min(100%, 480px);
+  padding: 1.25rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.flash-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #6000fa;
+}
+
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .alert.success {

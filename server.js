@@ -8,7 +8,7 @@ import { testConnection } from './src/models/db.js';
 
 
 // Define the application environment
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET || 'cse340-dev-secret';
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 // Define the port number the server will listen on
 const PORT = process.env.PORT || 3000;
@@ -102,6 +102,9 @@ app.listen(PORT, async () => {
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
     console.log(`Environment: ${NODE_ENV}`);
   } catch (error) {
-    console.error('Error connecting to the database:', error);
+    console.error('Database connection unavailable. Set DATABASE_URL or DB_URL in your hosting environment.');
+    console.error(error.message);
+    console.log(`Server is running at http://127.0.0.1:${PORT}`);
+    console.log(`Environment: ${NODE_ENV}`);
   }
 });

@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
+
 <body>
     <nav>
         <ul>
@@ -15,13 +19,50 @@
             <li><a href="/categories">Categories</a></li>
         </ul>
     </nav>
-        <% const messages = flash(); %>
-    <% Object.keys(messages).forEach(type => { %>
-        <% if (messages[type].length > 0) { %>
-            
-                <% messages[type].forEach(msg => { %>
-                    <%= msg %>
-                <% }); %>
-            
-        <% } %>
-    <% }); %>
+    <% const messages=flash(); %>
+        <% const flashTypes=Object.keys(messages); %>
+            <% const hasFlashMessages=flashTypes.some(type=> messages[type].length > 0); %>
+                <% if (hasFlashMessages) { %>
+                    <div class="flash-modal" id="flashModal" role="dialog" aria-modal="true"
+                        aria-labelledby="flashModalTitle">
+                        <div class="flash-modal-content">
+                            <button type="button" class="flash-close" aria-label="Close alerts">&times;</button>
+                            <h2 id="flashModalTitle">Notifications</h2>
+                            <% flashTypes.forEach(type=> { %>
+                                <% if (messages[type].length> 0) { %>
+                                    <% messages[type].forEach(msg=> { %>
+                                        <div class="alert <%= type %>">
+                                            <%= msg %>
+                                        </div>
+                                        <% }); %>
+                                            <% } %>
+                                                <% }); %>
+                        </div>
+                    </div>
+                    <% } %>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const modal = document.getElementById('flashModal');
+                                if (!modal) return;
+
+                                const closeModal = () => {
+                                    modal.classList.add('is-hidden');
+                                };
+
+                                const closeButton = modal.querySelector('.flash-close');
+                                closeButton?.addEventListener('click', closeModal);
+
+                                modal.addEventListener('click', (event) => {
+                                    if (event.target === modal) {
+                                        closeModal();
+                                    }
+                                });
+
+                                document.addEventListener('keydown', (event) => {
+                                    if (event.key === 'Escape') {
+                                        closeModal();
+                                    }
+                                });
+                            });
+                        </script>
