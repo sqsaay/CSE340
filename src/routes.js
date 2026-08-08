@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole } from './controllers/users.js';
+import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsersList } from './controllers/users.js';
 import { homePage } from './controllers/index.js';
 import { organizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
 import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, showEditProjectForm, processNewProjectForm, processEditProjectForm, projectValidation } from './controllers/projects.js';
@@ -59,6 +59,9 @@ router.get('/logout', processLogout);
 
 // Protected user dashboard route
 router.get('/dashboard', requireLogin, showDashboard);
+
+// Admin-only user management route
+router.get('/users', requireRole('admin'), showUsersList);
 
 // Error-handling routes
 router.get('/test-error', testErrorPage);
