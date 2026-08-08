@@ -4,9 +4,11 @@
             <%= title %>
         </h1>
 
+        <% if (user && user.role_name === 'admin') { %>
         <div class="page-actions">
             <a href="/new-category">Add a New Category</a>
         </div>
+        <% } %>
 
         <% const activeCategory=typeof category !=='undefined' ? category : null; const
             categoryProjects=Array.isArray(typeof projects !=='undefined' ? projects : []) ? (typeof projects

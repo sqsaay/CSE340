@@ -3,9 +3,11 @@
         <h1>
             <%= title %>
         </h1>
+        <% if (user && user.role_name === 'admin') { %>
         <div class="page-actions">
             <a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit this organization</a>
         </div>
+        <% } %>
         <% if (organizationDetails) { %>
             <section>
                 <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">

@@ -3,9 +3,11 @@
         <h1>
             <%= title %>
         </h1>
+        <% if (user && user.role_name === 'admin') { %>
         <div class="page-actions">
             <a href="/edit-project/<%= project.project_id %>">Edit Project</a>
         </div>
+        <% } %>
         <p><strong>Description:</strong>
             <%= project.description %>
         </p>
@@ -30,9 +32,11 @@
                     <% }); %>
             </ul>
             <% } %>
-            <div class="page-actions">
-            <a href="/project/<%= project.project_id %>/assign-categories">Edit Categories</a>
-                <a href="/projects">Back to project list</a>
+        <div class="page-actions">
+            <% if (user && user.role_name === 'admin') { %>
+                <a href="/project/<%= project.project_id %>/assign-categories">Edit Categories</a>
+            <% } %>
+            <a href="/projects">Back to project list</a>
         </div>
                 
     </main>
