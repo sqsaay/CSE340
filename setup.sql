@@ -82,4 +82,31 @@ INSERT INTO project_category (project_id, category_id) VALUES
 (1, 3), -- Project 1 → Community Development
 (2, 2), -- Project 2 → Health
 (3, 1); -- Project 3 → Education
-9
+
+-- ========================================
+-- Roles Table
+-- ========================================
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+	role_name VARCHAR(50) UNIQUE,
+	role_description TEXT NOT NULL
+);
+
+INSERT INTO roles (role_name, role_description) VALUES 
+    ('user', 'Standard user with basic access'),
+    ('admin', 'Administrator with full system access');
+
+-- Verify the data was inserted
+SELECT * FROM roles;
+
+-- ========================================
+-- Users Table
+-- ========================================
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INTEGER REFERENCES roles(role_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

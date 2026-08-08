@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard } from './controllers/users.js';
 import { homePage } from './controllers/index.js';
 import { organizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
 import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, showEditProjectForm, processNewProjectForm, processEditProjectForm, projectValidation } from './controllers/projects.js';
@@ -24,6 +25,10 @@ router.get('/edit-organization/:id', showEditOrganizationForm); // Placeholder f
 // Route for new project page
 router.get('/new-project', showNewProjectForm);
 router.get('/edit-project/:id', showEditProjectForm);
+// User registration routes
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
+
 router.post('/edit-project/:id', projectValidation, processEditProjectForm);
 // Routes to handle the assign categories to project form
 router.get('/project/:projectId/assign-categories', showAssignCategoriesForm);
@@ -38,6 +43,14 @@ router.post('/new-project', projectValidation, processNewProjectForm);
 router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
 // Route to handle new organization form submission
 router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+
+// User login routes
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
+
+// Protected dashboard route
+router.get('/dashboard', requireLogin, showDashboard);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
