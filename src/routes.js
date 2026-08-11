@@ -1,9 +1,9 @@
 import express from 'express';
-
 import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsersList } from './controllers/users.js';
 import { homePage } from './controllers/index.js';
 import { organizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
 import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, showEditProjectForm, processNewProjectForm, processEditProjectForm, projectValidation } from './controllers/projects.js';
+import { processAddVolunteer, processRemoveVolunteer, showVolunteeringPage } from './controllers/volunteers.js';
 import { categoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm, showNewCategoryForm, processNewCategoryForm, showEditCategoryForm, processEditCategoryForm, categoryValidation } from './controllers/categories.js';
 import { testErrorPage } from './controllers/errors.js';
 
@@ -25,6 +25,17 @@ router.post('/edit-organization/:id', requireRole('admin'), organizationValidati
 // Project routes (Public view)
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
+
+// Protected Volunteer routes for projects (Requires logged-in user)
+router.get('/volunteering', requireLogin, showVolunteeringPage);
+router.post('/project/:id/volunteer', requireLogin, processAddVolunteer);
+router.get('/project/:id/volunteer', requireLogin, processAddVolunteer);
+router.post('/project/:id/unvolunteer', requireLogin, processRemoveVolunteer);
+router.get('/project/:id/unvolunteer', requireLogin, processRemoveVolunteer);
+router.post('/volunteer/:id', requireLogin, processAddVolunteer);
+router.get('/volunteer/:id', requireLogin, processAddVolunteer);
+router.post('/unvolunteer/:id', requireLogin, processRemoveVolunteer);
+router.get('/unvolunteer/:id', requireLogin, processRemoveVolunteer);
 
 // Admin-only Project management routes
 router.get('/new-project', requireRole('admin'), showNewProjectForm);

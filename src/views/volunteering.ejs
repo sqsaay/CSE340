@@ -3,12 +3,8 @@
 <main>
     <h1><%= title %></h1>
 
-    <h2>Dashboard</h2>
-    <p>Name: <%= name %></p>
-    <p>Username: <%= email %></p>
-
     <section class="volunteered-projects-section" style="margin-top: 1.5rem;">
-        <h3>My Volunteered Projects</h3>
+        <h2>Projects You Have Volunteered For</h2>
         <% if (typeof volunteeredProjects !== 'undefined' && volunteeredProjects.length > 0) { %>
             <ul style="list-style-type: none; padding-left: 0;">
                 <% volunteeredProjects.forEach(project => { %>
@@ -30,12 +26,6 @@
             <p>You haven't volunteered for any projects yet. Check out <a href="/projects">upcoming service projects</a>!</p>
         <% } %>
     </section>
-
-    <% if (user && user.role_name === 'admin') { %>
-        <div class="page-actions" style="margin-top: 1rem;">
-            <a href="/users">Manage Registered Users</a>
-        </div>
-    <% } %>
 
 </main>
 

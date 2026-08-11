@@ -32,6 +32,28 @@
                     <% }); %>
             </ul>
             <% } %>
+
+        <% if (isLoggedIn) { %>
+        <div class="volunteer-section" style="margin: 1.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 8px;">
+            <h3>Volunteering</h3>
+            <% if (isVolunteered) { %>
+                <p style="color: green; font-weight: bold; font-size: 1.1rem;">You are volunteering for this project</p>
+                <p><a href="/project/<%= project.project_id %>/unvolunteer" class="btn btn-danger" style="color: #dc3545; text-decoration: underline;">Remove yourself as a volunteer</a></p>
+            <% } else { %>
+                <p><a href="/project/<%= project.project_id %>/volunteer" class="btn btn-primary" style="display: inline-block; padding: 0.5rem 1rem; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Volunteer for this project</a></p>
+            <% } %>
+
+            <% if (typeof volunteers !== 'undefined' && volunteers.length > 0) { %>
+                <h4 style="margin-top: 1rem;">Current Volunteers (<%= volunteers.length %>):</h4>
+                <ul>
+                    <% volunteers.forEach(v => { %>
+                        <li><%= v.name %></li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </div>
+        <% } %>
+
         <div class="page-actions">
             <% if (user && user.role_name === 'admin') { %>
                 <a href="/project/<%= project.project_id %>/assign-categories">Edit Categories</a>

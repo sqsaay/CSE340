@@ -110,3 +110,17 @@ CREATE TABLE users (
     role_id INTEGER REFERENCES roles(role_id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- ========================================
+-- Volunteers Table
+-- ========================================
+CREATE TABLE user_projects (
+    user_project_id SERIAL PRIMARY KEY,
+    user_id INT,
+    project_id INT, 
+    
+    
+    -- 2. Define the foreign key relationship at the bottom
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (project_id) REFERENCES service_project(project_id)
+);
